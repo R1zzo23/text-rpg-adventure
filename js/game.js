@@ -34,6 +34,9 @@ function play(){
       gameBtns.innerHTML = innerHTML
   }
 
+  if (room instanceof EnemyRoom)
+    console.log("player is in battle")
+
   room.modifyPlayer(player)
 
   if (player.victory){
