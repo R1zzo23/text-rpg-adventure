@@ -28,19 +28,19 @@ class Item {
 
   class Cloak extends Armor {
     constructor(name, description, value, armorAdded, strengthReq, magicReq){
-      super("Cloak", "A thin cloak to prevent just the most minor scratches.", 0, 1, 0, 0)
+      super("Cloak", "A thin cloth to prevent minor scratches.", 0, 1, 0, 0)
     }
   }
 
   class LightArmor extends Armor {
     constructor(name, description, value, armorAdded, strengthReq, magicReq){
-      super("Light Armor", "A thin chest plate to provide minor protection.", 7, 2, 7, 0)
+      super("Light Armor", "A chest plate to provide minor protection.", 7, 2, 7, 0)
     }
   }
 
   class DivineArmor extends Armor {
     constructor(name, description, value, armorAdded, strengthReq, magicReq){
-      super("Divine Armor", "A magical armor with divine powers to help protect one's self.", 18, 5, 3, 20)
+      super("Divine Armor", "Magical armor with divine powers.", 18, 5, 3, 20)
     }
   }
 
@@ -56,7 +56,7 @@ class Item {
 
   class Rock extends Weapon {
     constructor(name, description, value, damage, strengthReq, magicReq){
-      super("Rock", "A fist-sized rock, suitable for smashing things.", 0, 1, 0, 0)
+      super("Rock", "A fist-sized rock for smashing things.", 0, 1, 0, 0)
     }
   }
   
@@ -68,7 +68,7 @@ class Item {
 
   class SmallSword extends Weapon {
     constructor(name, description, value, damage, strengthReq, magicReq){
-      super("Small Sword", "An old dagger with some rust on it.", 4, 6, 5, 0)
+      super("Small Sword", "A seasoned, weathered sword.", 4, 6, 5, 0)
     }
   }
 

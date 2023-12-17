@@ -7,7 +7,12 @@ let currentEquipment = document.getElementById('current-equipment')
 let weaponName = document.getElementById('weaponName')
 let weaponDamage = document.getElementById('weaponDamage')
 let armorName = document.getElementById('armorName')
-let armorAdded = document.getElementById('armorAdded')
+let enemyTable = document.getElementById('enemyTable')
+let enemyName = document.getElementById('enemyName')
+let enemyArmor = document.getElementById('enemyArmor')
+let enemyStrength = document.getElementById('enemyStrength')
+let enemyHP = document.getElementById('enemyHP')
+let inventoryBody = document.getElementById('inventoryBody')
 let availableActions
 var room
 var busy = false
@@ -28,14 +33,19 @@ function play(){
       availableActions.forEach(action => {
         innerHTML += `
         <button type="button" name="button" onClick="clickGameBtn('${action.name}')">${action.name}</button>
-        `
+        <br>`
       });
 
       gameBtns.innerHTML = innerHTML
   }
 
-  if (room instanceof EnemyRoom)
-    console.log("player is in battle")
+  if (room instanceof EnemyRoom) {
+      console.log("player is in battle")
+      if (room.enemy.hp > 0)
+        displayEnemyInfo(room.enemy)
+  }
+  else
+    enemyTable.setAttribute("hidden", "hidden");
 
   room.modifyPlayer(player)
 
@@ -50,8 +60,19 @@ function play(){
 
   if (!isGameStarted) {
     displayHeroStats(player.strength, player.magic, player.hp, player.equippedWeapon, player.equippedArmor)
-    isGameStarted = false
+    isGameStarted = true
   }
+}
+
+function displayEnemyInfo(enemy) {
+    if (enemy.hp > 0) {
+      player.inBattle = true
+      enemyTable.removeAttribute('hidden')
+      enemyName.innerHTML = enemy.name
+      enemyArmor.innerHTML = enemy.armor
+      enemyStrength.innerHTML = enemy.damage
+      enemyHP.innerHTML = enemy.hp
+    }
 }
 
 function clickGameBtn(val){

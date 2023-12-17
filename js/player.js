@@ -12,6 +12,7 @@ class Player {
       this.location_y = startPosition[1]
       this.victory = false
       this.lastMove = null
+      this.inBattle = false
 
       this.equipBestArmor()
       this.equipBestWeapon()
@@ -28,19 +29,43 @@ class Player {
       this.equipBestArmor();
       this.equipBestWeapon();
       let text = "Inventory:"
+      let tableWeaponText = "<tr><td colspan='3'>Weapons</td></tr>"
+      let tableArmorText = "<tr><td colspan='3'>Armors</td></tr>"
+      let tableMiscellaneousText = "<tr><td colspan='3'>Miscellaneous</td></tr>"
       this.inventory.forEach(item =>{
         text += `<p>${item.description}</p>`
         console.log(item.description)
       });
 
+      player.inventory.forEach(function (item) {
+        if (item instanceof Weapon) {
+          tableWeaponText += `<tr><td colspan="2">${item.name}</td><td>+${item.damage} dmg</td></tr>`
+        }
+        else if (item instanceof Armor) {
+          tableArmorText += `<tr><td colspan="2">${item.name}</td><td>+${item.armorAdded} armor</td>`
+        }
+        else {
+          tableMiscellaneousText += `<tr><td>${item.name}</td><td colspan=2>${item.description}</td>`
+        }
+      })
+
+      tableWeaponText += "</tr>"
+      tableArmorText += "</tr>"
+      tableMiscellaneousText += "</tr>"
+
+      inventoryBody.innerHTML = tableWeaponText + tableArmorText + tableMiscellaneousText
+
       render(text)
     }
   
     move(dx,dy){
+      this.inBattle = false
       this.location_x += dx
       this.location_y += dy
       console.log(tileExists(this.location_x,this.location_y))
       console.log("in room (" + player.location_x + ", " + player.location_y + ")")
+      enemyTable.setAttribute("hidden", "hidden");
+
     }
   
     moveNorth(){
@@ -69,6 +94,7 @@ class Player {
   
   //fleeing always sends you back in the direction you came from, if possible
   flee(){
+      this.inBattle = false
       if (this.lastMove == "Move south") {
         console.log("Fleeing north!")
         this.moveNorth()
@@ -159,6 +185,7 @@ class Player {
         if (!enemy.isAlive()) {
           console.log(`You killed the ${enemy.name}!`)
           text += `<p>You killed the ${enemy.name}!</p>`
+          enemyTable.setAttribute("hidden", "hidden");
         } 
         else {
           console.log(`${enemy.name} has ${enemy.hp} HP left.`)
@@ -166,7 +193,7 @@ class Player {
         }
       }
       
-      addStoryText(text)
+      render(text)
     }
   }
   
