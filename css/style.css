@@ -5,3 +5,15 @@
 #story-text {
     font-size: smaller;
 }
+
+#weaponsHeader {
+    background-color: lightblue;
+}
+
+#armorHeader {
+    background-color: lightgreen;
+}
+
+#miscHeader {
+    background-color: lightpink;
+}

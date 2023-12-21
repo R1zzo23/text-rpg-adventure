@@ -72,6 +72,12 @@ class EmptyCavePath extends MapTile {
       if(!this.item.pickedUp){
         this.addLoot(player)
       }
+      if (this.item instanceof Weapon && player.hasRock) {
+        console.log("dropping the rock")
+        player.inventory.splice(1, 1) //drops the rock after picking up real weapon
+        player.hasRock = false
+      }
+      player.printInventory()
     }
   }
 

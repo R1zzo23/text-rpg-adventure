@@ -8,9 +8,9 @@ class Item {
    }
 
    class Gold extends Item {
-    constructor(name, description, amt){
-      super("Gold", "Gold currency stamped with the seal of the kingdom.",amt)
-      this.amt = amt
+    constructor(name, description){
+      super("Gold", "Money with kingdom's seal.")
+      this.amt = 0
     }
   }
 

@@ -7,7 +7,7 @@ class Action {
   
   class ViewInventory extends Action {
     constructor(method,name){
-      super(method=player.printInventory,name="View Inventory")
+      super(method=player.toggleInventoryTable,name="View Inventory")
     }
   }
   

@@ -1,11 +1,12 @@
 class Player {
 
     constructor(inventory,hp,xp,strength,armor,magic,location_x,location_y,victory){
-      this.inventory = [new Gold(5),new Rock(),new Cloak()]
+      this.inventory = [new Gold(),new Rock(),new Cloak()]
       this.equippedWeapon = null
       this.equippedArmor = null
       this.hp = 100
       this.xp = 0
+      this.nextLevelXP = 25
       this.strength = 7
       this.magic = 5
       this.location_x = startPosition[0]
@@ -13,6 +14,7 @@ class Player {
       this.victory = false
       this.lastMove = null
       this.inBattle = false
+      this.hasRock = true
 
       this.equipBestArmor()
       this.equipBestWeapon()
@@ -25,17 +27,32 @@ class Player {
     do_action(action, ...others){
     }
 
+    addGold(num) {
+      this.inventory.find((element) => element.name == "Gold").amt += num
+    }
+
+    toggleInventoryTable() {
+      console.log(player.inventory)
+      if (inventoryTable.hasAttribute('hidden')) {
+        inventoryTable.removeAttribute('hidden')
+        player.printInventory()
+      }
+      else {
+        inventoryTable.setAttribute('hidden', 'hidden')
+      }
+    }
+
     printInventory(){
       this.equipBestArmor();
       this.equipBestWeapon();
-      let text = "Inventory:"
-      let tableWeaponText = "<tr><td colspan='3'>Weapons</td></tr>"
-      let tableArmorText = "<tr><td colspan='3'>Armors</td></tr>"
-      let tableMiscellaneousText = "<tr><td colspan='3'>Miscellaneous</td></tr>"
-      this.inventory.forEach(item =>{
+      //let text = "Inventory:"
+      let tableWeaponText = "<tr><td id='weaponsHeader' colspan='3'>Weapons</td></tr>"
+      let tableArmorText = "<tr><td id='armorHeader' colspan='3'>Armors</td></tr>"
+      let tableMiscellaneousText = "<tr><td id='miscHeader' colspan='3'>Miscellaneous</td></tr>"
+      /*this.inventory.forEach(item =>{
         text += `<p>${item.description}</p>`
         console.log(item.description)
-      });
+      });*/
 
       player.inventory.forEach(function (item) {
         if (item instanceof Weapon) {
@@ -43,6 +60,9 @@ class Player {
         }
         else if (item instanceof Armor) {
           tableArmorText += `<tr><td colspan="2">${item.name}</td><td>+${item.armorAdded} armor</td>`
+        }
+        else if (item instanceof Gold) {
+          tableMiscellaneousText += `<tr><td>${item.amt} ${item.name}</td><td colspan=2>${item.description}</td>`
         }
         else {
           tableMiscellaneousText += `<tr><td>${item.name}</td><td colspan=2>${item.description}</td>`
@@ -55,7 +75,8 @@ class Player {
 
       inventoryBody.innerHTML = tableWeaponText + tableArmorText + tableMiscellaneousText
 
-      render(text)
+      displayHeroStats(this)
+      //render(text)
     }
   
     move(dx,dy){
@@ -127,13 +148,11 @@ class Player {
             else {
               maxDmg = item.damage
               bestWeapon = item
-              console.log(bestWeapon.name)
             }
           }
         }
       });
       this.equippedWeapon = bestWeapon
-      console.log("You currently have equipped the " + this.equippedWeapon.name)
     }
 
     equipBestArmor() {
@@ -150,13 +169,11 @@ class Player {
             else {
               maxAddedArmor = item.armorAdded
               bestArmor = item
-              console.log(bestArmor.name)
             }
           }
         }
       });
       this.equippedArmor = bestArmor
-      console.log("You currently have equipped the " + this.equippedArmor.name)
     }
 
     attack(enemy){
@@ -186,6 +203,7 @@ class Player {
           console.log(`You killed the ${enemy.name}!`)
           text += `<p>You killed the ${enemy.name}!</p>`
           enemyTable.setAttribute("hidden", "hidden");
+          calculateXP(enemy)
         } 
         else {
           console.log(`${enemy.name} has ${enemy.hp} HP left.`)

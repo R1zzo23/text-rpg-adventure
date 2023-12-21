@@ -14,18 +14,18 @@ class Enemy {
   
   class GiantSpider extends Enemy {
     constructor(name, hp, damage, armor, xp){
-      super(name="Giant Spider", hp=15, armor=2, damage=5, xp=7)
+      super(name="Giant Spider", hp=15, armor=2, damage=5, xp=15)
     }
   }
 
   class Rats extends Enemy {
     constructor(name, hp, damage, armor, xp){
-      super(name="Rats", hp=4, damage=1, armor=0 ,xp=1)
+      super(name="Rats", hp=4, damage=1, armor=0 ,xp=5)
     }
   }
 
   class Undead extends Enemy {
     constructor(name, hp, damage, armor, xp){
-      super(name="Undead", hp=8, damage=3, armor=1, xp=2)
+      super(name="Undead", hp=8, damage=3, armor=1, xp=10)
     }
   }

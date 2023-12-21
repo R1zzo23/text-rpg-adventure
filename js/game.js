@@ -7,12 +7,16 @@ let currentEquipment = document.getElementById('current-equipment')
 let weaponName = document.getElementById('weaponName')
 let weaponDamage = document.getElementById('weaponDamage')
 let armorName = document.getElementById('armorName')
+let armorAdded = document.getElementById('armorAdded')
 let enemyTable = document.getElementById('enemyTable')
 let enemyName = document.getElementById('enemyName')
 let enemyArmor = document.getElementById('enemyArmor')
 let enemyStrength = document.getElementById('enemyStrength')
 let enemyHP = document.getElementById('enemyHP')
 let inventoryBody = document.getElementById('inventoryBody')
+let inventoryTable = document.getElementById('inventoryTable')
+let heroXP = document.getElementById('heroXP')
+let nextLevelXP = document.getElementById('nextLevelXP')
 let availableActions
 var room
 var busy = false
@@ -59,8 +63,10 @@ function play(){
   }
 
   if (!isGameStarted) {
-    displayHeroStats(player.strength, player.magic, player.hp, player.equippedWeapon, player.equippedArmor)
+    player.addGold(5)
+    displayHeroStats(player)
     isGameStarted = true
+    player.printInventory()
   }
 }
 
@@ -73,6 +79,16 @@ function displayEnemyInfo(enemy) {
       enemyStrength.innerHTML = enemy.damage
       enemyHP.innerHTML = enemy.hp
     }
+}
+
+function calculateXP(enemy) {
+  let min = Math.round(enemy.xp * .75)
+  let max = Math.round(enemy.xp * 1.25)
+  console.log("min - " + min + ", max - " + max)
+  let xp = Math.floor(Math.random() * (max - min + 1) + min)
+  console.log("xp added: " + xp)
+  player.xp += xp
+  displayHeroStats(player)
 }
 
 function clickGameBtn(val){
@@ -92,7 +108,7 @@ function clickGameBtn(val){
     player.moveSouth()
   } 
   else if(val === "View Inventory"){
-    player.printInventory()
+    player.toggleInventoryTable()
     busy = true
   } 
   else if (val === "Attack"){
@@ -114,14 +130,16 @@ function addStoryText(text) {
   storyText.innerHTML += text
 }
 
-function displayHeroStats(strength, magic, hp, weapon, armor){
-  heroStrength.innerHTML = strength
-  heroMagic.innerHTML = magic
-  heroHP.innerHTML = hp
-  weaponName.innerHTML = weapon.name
-  weaponDamage.innerHTML = "+ " + weapon.damage + " dmg"
-  armorName.innerHTML = armor.name
-  armorAdded.innerHTML = "+ " + armor.armorAdded + " armor"
+function displayHeroStats(player){
+  heroStrength.innerHTML = player.strength
+  heroMagic.innerHTML = player.magic
+  heroHP.innerHTML = player.hp
+  weaponName.innerHTML = player.equippedWeapon.name
+  weaponDamage.innerHTML = "+ " + player.equippedWeapon.damage + " dmg"
+  armorName.innerHTML = player.equippedArmor.name
+  armorAdded.innerHTML = "+ " + player.equippedArmor.armorAdded + " armor"
+  heroXP.innerHTML = player.xp
+  nextLevelXP.innerHTML = player.nextLevelXP
 }
 
 play()
