@@ -16,6 +16,7 @@
     <script defer src="js/world.js" type="text/javascript"></script>
     <script defer src="js/player.js" type="text/javascript"></script>
     <script defer src="js/actions.js" type="text/javascript"></script>
+    <script defer src="js/xp.js" type="text/javascript"></script>
     <script defer src="js/game.js" type="text/javascript"></script>
   </head>
   <body>
@@ -74,12 +75,12 @@
               <tr>
                 <td>Strength</td>
                 <td id="heroStrength">Jacob</td>
-                <td><button type="button" class="btn btn-xs btn-info" disabled="true">+</button></td>
+                <td><button class="attributeUpgradeBtn" onclick="upgradeBtnPushed(1)" type="button" class="btn btn-xs btn-info" disabled="true">+</button></td>
               </tr>
               <tr>
                 <td>Magic</td>
                 <td id="heroMagic">Jacob</td>
-                <td><button type="button" class="btn btn-xs btn-info" disabled="true">+</button></td>
+                <td><button class="attributeUpgradeBtn" onclick="upgradeBtnPushed(2)" type="button" class="btn btn-xs btn-info" disabled="true">+</button></td>
               </tr>
               <tr>
                 <td colspan="2">HP</td>

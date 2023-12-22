@@ -6,7 +6,9 @@ class Player {
       this.equippedArmor = null
       this.hp = 100
       this.xp = 0
+      this.level = 1
       this.nextLevelXP = 25
+      this.attributeUpgradesAvailable = 0
       this.strength = 7
       this.magic = 5
       this.location_x = startPosition[0]

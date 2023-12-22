@@ -88,6 +88,11 @@ function calculateXP(enemy) {
   let xp = Math.floor(Math.random() * (max - min + 1) + min)
   console.log("xp added: " + xp)
   player.xp += xp
+  if (player.xp >= player.nextLevelXP) {
+    levelPlayerUp(player)
+    calculateXpForNextLevel(player)
+    allowAttributeUpgrades(player)
+  }
   displayHeroStats(player)
 }
 
