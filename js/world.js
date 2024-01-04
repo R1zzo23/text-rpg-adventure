@@ -1,8 +1,8 @@
 map = [
-    ['StartingRoom'       ,'EmptyCavePath','RatsRoom'     ,'UndeadRoom'           ,'GiantSpiderRoom'],
-    ['FindDaggerRoom'     ,''             ,'EmptyCavePath','EmptyCavePath'        ,''],
-    ['FindSmallSwordRoom' ,''             ,'EmptyCavePath',''                     ,''],
-    ['GiantSpiderRoom'    ,'EmptyCavePath','EmptyCavePath',''                     ,''],
+    ['StartingRoom'       ,'EmptyCavePath','RatsRoom'          ,'UndeadRoom'           ,'GiantSpiderRoom'],
+    ['FindDaggerRoom'     ,''             ,'EmptyCavePath'     ,'FindSmallSwordRoom'   ,''],
+    ['EmptyCavePath'      ,''             ,'EmptyCavePath'     ,''                     ,''],
+    ['GiantSpiderRoom'    ,'EmptyCavePath','EmptyCavePath'     ,''                     ,''],
     [''                   ,'EmptyCavePath','FindLightArmorRoom','GiantSpiderRoom' ,'LeaveCaveRoom'],
   ]
   

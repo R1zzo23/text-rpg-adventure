@@ -3,6 +3,7 @@ let gameBtns = document.getElementById('game-btns')
 let heroStrength = document.getElementById('heroStrength')
 let heroMagic = document.getElementById('heroMagic')
 let heroHP = document.getElementById('heroHP')
+let heroLevel = document.getElementById('heroLevel')
 let currentEquipment = document.getElementById('current-equipment')
 let weaponName = document.getElementById('weaponName')
 let weaponDamage = document.getElementById('weaponDamage')
@@ -144,6 +145,7 @@ function displayHeroStats(player){
   armorName.innerHTML = player.equippedArmor.name
   armorAdded.innerHTML = "+ " + player.equippedArmor.armorAdded + " armor"
   heroXP.innerHTML = player.xp
+  heroLevel.innerHTML = player.level
   nextLevelXP.innerHTML = player.nextLevelXP
 }
 
